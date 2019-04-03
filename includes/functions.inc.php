@@ -2,6 +2,39 @@
 //Include all required classes
 include("../classes/xtea.class.php");
 include("config.inc.php");
+include("variables.inc.php");
+
+function checkTestMode(){
+	if($isTestInstallation == 1){
+		return $apiTestKey;
+	}
+	else{
+		return $apiLiveKey;
+	}
+}
+
+function checkAccountHolder(){
+	if(is_null($name) == true){
+		if(is_null($holder) == false){
+			return $holder;
+		}
+		else{
+			echo("Missing Accountholder");
+		}
+	}
+	else if(is_null($holder) == false){
+		return $holder;
+	}
+}
+
+function checkSourceIsFilledInURL() {
+	if(is_null($pament_source) == true){
+		return false;
+	}
+	else {
+		return true;
+	}
+}
 
 function makeAmountCents($string) {
 	// characters to remove
@@ -35,5 +68,33 @@ function decryptCustomerData($cipher) {
 	$xtea = new XTEA($encryptionKey); // Get Encryption Key of config.inc.php
 	$plain = $xtea->Decrypt($cipher); //Decrypts the cipher text
 	return $plain;
+}
+
+function getCCDetailsOfSourceID($source){
+	$con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+	$res = mysqli_query($con, "SELECT * FROM cc_sources");
+	while($dsatz = mysqli_fetch_assoc($res)) {
+		$decryptedName = decryptCustomerData($dsatz["holder"]);
+		$decryptedCardNumber = decryptCustomerData($dsatz["cc_number"]);
+		$decryptedCardMonth = decryptCustomerData($dsatz["cc_month"]);
+		$decryptedCardYear = decryptCustomerData($dsatz["cc_year"]);
+		$decryptedCardCVC = decryptCustomerData($dsatz["cc_cvc"]);
+		$decryptedEmail = decryptCustomerData($dsatz["email"]);
+		$decryptedCusNo = decryptCustomerData($dsatz["customer_no"]);
+	}
+	mysqli_close($con);
+}
+
+function getDDDetailsOfSourceID($source){
+	$con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+	$res = mysqli_query($con, "SELECT * FROM dd_sources");
+	while($dsatz = mysqli_fetch_assoc($res)) {
+		$decryptedName = decryptCustomerData($dsatz["holder"]);
+		$decryptedIBAN = decryptCustomerData($dsatz["dd_iban"]);
+		$decryptedBIC = decryptCustomerData($dsatz["dd_bic"]);
+		$decryptedEmail = decryptCustomerData($dsatz["email"]);
+		$decryptedCusNo = decryptCustomerData($dsatz["customer_no"]);
+	}
+	mysqli_close($con);
 }
 ?>

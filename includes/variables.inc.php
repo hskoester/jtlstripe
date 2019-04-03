@@ -6,6 +6,7 @@ $order = $_GET['order'];
 $amount = $_GET['amount'];
 $cus_no = $_GET['cus_no'];
 $payment_source = $_GET['pay_source'];
+$holder = $_GET['account_holder']
 
 /*CreditCard Parameter*/
 $cc_number = $_GET['cc_number'];
@@ -18,4 +19,22 @@ $cc_holder = $_GET['cc_holder'];
 $dd_iban = $_GET['iban'];
 $dd_bic = $_GET['bic'];
 $dd_holder = $_GET['dd_holder'];
+
+/*Encrypted Stuff*/
+$encryptName = "";
+$encryptCardNumber = "";
+$encryptExpMonth = "";
+$encryptExpYear = "";
+$encryptCardCVC = "";
+$encryptEmail = "";
+$encryptCusNo = "";
+
+/*Decrypted Stuff*/
+$decryptedName = "";
+$decryptedCardNumber = "";
+$decryptedExpMonth = "";
+$decryptedExpYear = "";
+$decryptedCardCVC = "";
+$decryptedEmail = "";
+$decryptedCusNo = "";
 ?>
