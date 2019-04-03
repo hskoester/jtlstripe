@@ -8,7 +8,7 @@ $activeHolder = checkAccountHolder();
 
 $amount_fixed = makeAmountCents($amount); // Convert decimal amount to cents amount
 //Adding Source (Card) to Stripe
-$json=trim(shell_exec('curl https://api.stripe.com/v1/customers -u '.$activeAPIKey.': -d card[number]="'.$cc_number.'" -d card[exp_month]="'.$cc_month.'" -d card[exp_year]="'.$cc_year.'" -d card[cvc]="'.$cc_cvc.'" -d name="'.$activeHolder.'" -d email="'.$email.'"'));
+$json=trim(shell_exec('curl https://api.stripe.com/v1/customers -u '.$activeAPIKey.': -d card[number]="'.$cc_number.'" -d card[exp_month]="'.$cc_month.'" -d card[exp_year]="'.$cc_year.'" -d card[cvc]="'.$cc_cvc.'" -d usage=reusable -d owner[name]="'.$activeHolder.'" -d owner[email]="'.$email.'"'));
 $data=json_decode($json,true);
 $customer=$data['id'];
 $source=$data['sources']['data'][0]['id'];
