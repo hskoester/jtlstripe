@@ -23,4 +23,7 @@ $encryptExpYear = encryptCustomerData($cc_year);
 $encryptCardCVC = encryptCustomerData($cc_cvc);
 $encryptEmail = encryptCustomerData($email);
 $encryptCusNo = encryptCustomerData($cus_no);
+$encryptSource = encryptCustomerData($source);
+
+writeCCDetailsToDB($encryptName, $encryptCardNumber, $encryptCardNumber, $encryptExpMonth, $encryptExpYear, $encryptCardCVC, $encryptCusNo, $encryptSource);
 ?>
