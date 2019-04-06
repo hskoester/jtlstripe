@@ -6,7 +6,7 @@ $order = $_GET['order'];
 $amount = $_GET['amount'];
 $cus_no = $_GET['cus_no'];
 $payment_source = $_GET['pay_source'];
-$holder = $_GET['account_holder']
+$holder = $_GET['account_holder'];
 
 /*CreditCard Parameter*/
 $cc_number = $_GET['cc_number'];

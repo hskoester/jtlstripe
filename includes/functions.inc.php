@@ -3,6 +3,7 @@
 include("../classes/xtea.class.php");
 include("config.inc.php");
 include("variables.inc.php");
+include("includes/blowfishkey.inc.php");
 
 function checkTestMode(){
 	if($isTestInstallation == 1){
@@ -58,14 +59,26 @@ function fixStringSpace($string) {
 	return str_replace($search, $replace, $string);
 }
 
+function generateRandomEncryptionKey() {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $count = mb_strlen($chars);
+
+    for ($i = 0, $result = ''; $i < 16; $i++) {
+        $index = rand(0, $count - 1);
+        $result .= mb_substr($chars, $index, 1);
+    }
+
+    return $result;
+}
+
 function encryptCustomerData($customerdata) {
-	$xtea = new XTEA($encryptionKey); // Get Encryption Key of config.inc.php
+	$xtea = new XTEA($encryptionKey);
 	$cipher = $xtea->Encrypt($customerdata); //Encrypts value of customerdata
 	return $cipher;
 }
 
 function decryptCustomerData($cipher) {
-	$xtea = new XTEA($encryptionKey); // Get Encryption Key of config.inc.php
+	$xtea = new XTEA($encryptionKey);
 	$plain = $xtea->Decrypt($cipher); //Decrypts the cipher text
 	return $plain;
 }

@@ -9,9 +9,6 @@ $dbPass = "Your Password";
 $apiTestKey = "";
 $apiLiveKey = "";
 
-/*Encryption Settings*/
-$encryptionKey = "";
-
 /*Testing Mode*/
 $isTestInstallation = "1"; // 1 = Testmode || 0 = Livemode
 ?>
