@@ -100,7 +100,7 @@ function getDDDetailsOfSourceID($source){
 
 function writeCCDetailsToDB($ccholder, $ccnumber, $ccmonth, $ccyear, $cccvc, $customernumber, $source) {
 	$con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
-	$sql = "INSERT INTO 'cc_transactions' (cc_holder', 'cc_no', 'cc_month', 'cc_year', 'cc_cvc', 'customer_no', 'source_id', 'creation_time') VALUES ('".$ccholder."', '".$ccnumber."', '".$ccmonth."', '".$ccyear."', '".$cccvc."', '".$customernumber."', '".$source."', CURRENT_TIMESTAMP);";
+	$sql = "INSERT INTO 'cc_details' (cc_holder', 'cc_no', 'cc_month', 'cc_year', 'cc_cvc', 'customer_no', 'source_id', 'creation_time') VALUES ('".$ccholder."', '".$ccnumber."', '".$ccmonth."', '".$ccyear."', '".$cccvc."', '".$customernumber."', '".$source."', CURRENT_TIMESTAMP);";
 	mysqli_query($con, $sql);
 	mysqli_close($con);
 }
